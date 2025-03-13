@@ -26,6 +26,6 @@ List of files to edit:
 2. `manifest.yml`
 3. `template/before.sh.erb`
 
-This app assumes the cluster uses slurm as the scheduler. You wil likely need to
-modify other files. 
+This app assumes the cluster uses slurm as the scheduler. If you use a different
+scheduler, you wil likely need to modify other files.
   
