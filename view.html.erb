@@ -1,0 +1,21 @@
+<br>
+<br>
+PostgreSQL is running on:
+
+* **Host:** <%= host %>
+* **Port:** <%= port %>
+* **Database:** postgres
+* **User:** <%= ENV["USER"] %>
+* **Password:** <%= password %>
+* **Database directory:** <%= pgdata %>
+
+Example command to connect to the database with `psql`:
+
+    singularity exec --env PGHOST=<%= host %>,PGPORT=<%= port %>,PGDATABASE=postgres,PGUSER=<%= ENV["USER"] %>,PGPASSWORD=<%= password %> <%= container_image %> psql
+
+For large-data or latency-sensitive usage, a local (on the same node as the postgres server) unix domain socket connection with [peer authentication](https://www.postgresql.org/docs/current/auth-peer.html) may be used instead of a TCP connection with password authentication:
+
+    ssh <%= host %>
+    singularity exec --env PGHOST=<%= pgdata %>,PGPORT=<%= port %>,PGDATABASE=postgres <%= container_image %> psql
+
+*Note: the job will receive a clean shutdown signal approximately 5 minutes before the timelimit for the job is reached.*

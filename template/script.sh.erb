@@ -1,0 +1,20 @@
+#!/bin/env sh
+
+# Benchmark info
+echo "TIMING - Starting Postgresql at: $(date)"
+
+# enable this only if needed for debug purpose.
+set -o errexit -o nounset -o xtrace
+
+
+## now start the server in foreground mode so that can be used with srun
+srun -c $SLURM_CPUS_PER_TASK -E --export=ALL singularity run \
+  --cleanenv \
+  --env PGDATA="${PGDATA}" \
+  --env POSTGRES_INITDB_ARGS='--auth-local=peer --allow-group-access' \
+  --env PGPORT=${PGPORT} \
+  --env POSTGRES_PASSWORD="${password:-}" \
+  --env POSTGRES_USER=${LOGNAME} \
+  --scratch /run \
+  ${container_image} -c "unix_socket_directories=/var/run/postgresql,${PGDATA}"
+

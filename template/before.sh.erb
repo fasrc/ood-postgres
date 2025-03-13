@@ -1,0 +1,38 @@
+# This script (`before.sh.erb`) is sourced directly into the main Bash script
+# that is run when the batch job starts up. It is called before the `script.sh`
+# is forked off into a separate process.
+#
+# There are some helpful Bash functions that are made available to this script
+# that encapsulate commonly used routines when initializing a web server:
+#
+#   - find_port
+#       Find available port in range [$1..$2]
+#       Default: 2000 65535
+#
+# We **MUST** supply the following environment variables in this
+# `before.sh.erb` script so that a user can connect back to the web server when
+# it is running (case-sensitive variable names):
+#
+#   - $port
+#       The port that the web server is listening on
+
+set -o errexit -o nounset
+
+# Find available port to run server on
+port=$(find_port localhost 7000 11000 )
+export PGPORT=${port}
+
+export container_image=<%= context.postgres_version %>
+
+## Datafolder
+export PGDATA=/scratch/$USER/$SLURM_JOB_ID
+
+<%- unless context.pgdata.blank? -%>
+PGDATA=<%= context.pgdata  %>
+<%- end -%>
+
+export pgdata=${PGDATA}  # lower-case for view.html.erb
+
+<%- unless context.postgres_password.blank? -%>
+export password=<%= context.postgres_password %>
+<%- end -%>
