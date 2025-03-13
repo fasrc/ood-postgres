@@ -18,14 +18,15 @@
 
 set -o errexit -o nounset
 
+# site-specific: may need to change port range
 # Find available port to run server on
 port=$(find_port localhost 7000 11000 )
 export PGPORT=${port}
 
 export container_image=<%= context.postgres_version %>
 
-## Datafolder
-export PGDATA=/scratch/$USER/$SLURM_JOB_ID
+# site-specific: may need to change temp dir
+export PGDATA=${TMPDIR:-/tmp}/$USER/$SLURM_JOB_ID
 
 <%- unless context.pgdata.blank? -%>
 PGDATA=<%= context.pgdata  %>

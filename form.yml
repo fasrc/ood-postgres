@@ -1,5 +1,6 @@
 ---
 title: "PostgreSQL DB"
+# site-specific: change cluster name
 cluster: "odyssey3"
 attributes:
   custom_time:
@@ -7,6 +8,7 @@ attributes:
     value: "04:00:00"
     widget: text_field
   bc_queue: 
+# site-specific: change default partition
     value: "shared"
   custom_email_address:
     label: (optional) email address for job status notifications
@@ -16,6 +18,7 @@ attributes:
   postgres_version:
     widget: select
     label: "Postgres version"
+# site-specific: change versions and location of containers
     options:
       - [ "pgvector 0.8.0 (Postgres 17)", "/n/singularity_images/OOD/postgres/pgvector_0.8.0-pg17.sif" ]
       - [ "PostGIS 3.4 (Postgres 16)", "/n/singularity_images/OOD/postgis/postgis_16-3.4.sif" ]
@@ -58,7 +61,7 @@ attributes:
     help: >
       Directory that will be used to store the database files.
       The database will be created if it doesn't already exist in the specified directory.  
-      *If unset*, defaults to: `/scratch/$USER/$SLURM_JOB_ID` -- note this is node-local and lasts only for the duration of the Slurm job!
+      *If unset*, defaults to: `/$TMPDIR/$USER/$SLURM_JOB_ID` or, if `$TMPDIR` is null, to `/tmp/$USER/$SLURM_JOB_ID` -- note this is node-local and lasts only for the duration of the Slurm job!
 
 #  postgres_db:
 #    label: name for the database

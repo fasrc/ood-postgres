@@ -1,9 +1,7 @@
 ---
 name: Postgresql
+# site-specific: may change to conform to your site's category
 category: Interactive Apps
-subcategory: FAS CGA
 role: batch_connect
 description: |
-  This app will launch postgres on a compute node on the  [FAS-RC] cluster:
-
-  [FAS-RC]: https://www.rc.fas.harvard.edu
+  This app will launch PostgreSQL-based database on a compute node.
