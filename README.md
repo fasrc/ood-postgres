@@ -22,10 +22,18 @@ modifications are commented with a `site-specific` tag. For example, the file
 
 List of files to edit:
 
-1. `form.yml`
-2. `manifest.yml`
-3. `template/before.sh.erb`
+1. [`form.yml`](form.yml)
+2. [`manifest.yml`](manifest.yml)
+3. [`template/before.sh.erb`](template/before.sh.erb)
 
 This app assumes the cluster uses slurm as the scheduler. If you use a different
 scheduler, you wil likely need to modify other files.
+
+## Singularity containers
+
+You can build the Singularity containers using the Singularity definition files
+provided in this repository:
+
+- [PostGIS version](singularity_postgis.def)
+- [pgvector version](singularity_pgvector.def)
   

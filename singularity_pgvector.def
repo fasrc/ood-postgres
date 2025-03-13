@@ -1,0 +1,2 @@
+bootstrap: docker
+from: docker.io/pgvector/pgvector:0.8.0-pg17
