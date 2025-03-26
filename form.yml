@@ -40,6 +40,15 @@ attributes:
     widget: number_field
     help: |
       *sbatch -c, --cpus-per-task=\<ncpus\>*
+  custom_num_gpus:
+    label: "Number of GPUs to allocate. Available only on GPU enabled partitions"
+    value: 0
+    min:   0
+    step:  1
+    max:   8
+    widget: number_field
+    help: |
+      *sbatch --gres=gpu:\<ngpus\>*
   custom_reservation:
     label: "(optional) Slurm Reservation"
     widget: text_field
@@ -79,6 +88,7 @@ form:
   - bc_queue
   - custom_memory_per_node
   - custom_num_cores
+  - custom_num_gpus
   - custom_time
   - pgdata
 # - postgres_db
