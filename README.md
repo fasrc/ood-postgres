@@ -10,7 +10,7 @@ Apps](https://rcood.rc.fas.harvard.edu/pun/sys/dashboard/admin/dev/products).
 ## Site-specific modifications
 
 If you wish to use this app in a different cluster, some files need to edited to
-conform to your site's OOD implementation. All ncessary and potential
+conform to your site's OOD implementation. All necessary and potential
 modifications are commented with a `site-specific` tag. For example, the file
 `form.yml` has for slurm partition:
 
